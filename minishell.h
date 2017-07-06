@@ -1,6 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define BUFFSIZE 20
+# define BUFFSIZE 10
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
