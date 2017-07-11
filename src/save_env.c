@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   save_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/11 22:33:06 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/11 16:17:56 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/11 16:45:23 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int					main(int ac, char **av, char **env)
+int			save_env(char **env, t_list **list)
 {
-	char		*cmd;
-	t_list		*list;
+	int			i;
+	char		**tmp;
+	t_env		*set_env;
 
-	(void)ac;
-	(void)av;
-	list = ft_lstnew(NULL, 0);
-	if (!(save_env(env, &list)))
-		puterror(1, "Error from allocation memory");
-	while (1)
+	(void)list;
+	i = -1;
+	if (!(set_env = (t_env *)malloc(sizeof(t_env))))
+		return (0);
+	while (env[++i])
 	{
-		ft_putstr("$ > ");
-		cmd = read_standard_input();
-		resolve_command(search_command(cmd), list);
+		tmp = ft_strsplit(env[i], '=');
+		set_env->name = ft_strdup(tmp[0]);
+		set_env->value = ft_strdup(tmp[1]);
+		ft_lstadd(list, ft_lstnew((void *)set_env, sizeof(t_env) * 2));
 	}
-	return (0);
+	return (1);
 }

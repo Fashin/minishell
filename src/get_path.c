@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/11 22:33:06 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/11 17:57:32 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/11 17:58:55 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int					main(int ac, char **av, char **env)
+char		*get_path(t_list *list)
 {
-	char		*cmd;
-	t_list		*list;
+	t_env		*get_env;
 
-	(void)ac;
-	(void)av;
-	list = ft_lstnew(NULL, 0);
-	if (!(save_env(env, &list)))
-		puterror(1, "Error from allocation memory");
-	while (1)
+	while (list->content)
 	{
-		ft_putstr("$ > ");
-		cmd = read_standard_input();
-		resolve_command(search_command(cmd), list);
+		get_env = (t_env *)list->content;
+		if (ft_strcmp(get_env->name, "PATH") == 0)
+			return (get_env->value);
+		list = list->next;
 	}
-	return (0);
+	return (NULL);
 }

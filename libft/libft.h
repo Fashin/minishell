@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 12:41:11 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/06/22 15:38:02 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/11 17:21:40 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char					*ft_strcat(char *s1, const char *s2);
 char					*ft_strncat(char *s1, const char *s2, size_t n);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strrchr(const char *s, int c);
+char					*ft_arraychr(char **array, char *search);
 char					*ft_strstr(const char *big, const char *little);
 char					*ft_strnstr(const char *big, const char *little,
 						size_t length);

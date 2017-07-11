@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   search_command.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/11 19:06:01 by cbeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static char		*clean_up_tabs(char *str)
@@ -18,6 +30,21 @@ static char		*clean_up_tabs(char *str)
 	return (str);
 }
 
+static char		**clean_back_line(char **str)
+{
+	int			i;
+	size_t		length;
+
+	i = -1;
+	while (str[++i])
+	{
+		length = ft_strlen(str[i]);
+		if (str[i][length - 1] == '\n')
+			str[i] = ft_strncpy(ft_strnew(length), str[i], length - 1);
+	}
+	return (str);
+}
+
 char			**search_command(char *cmd)
 {
 	char	**ret;
@@ -27,9 +54,6 @@ char			**search_command(char *cmd)
 	ret = NULL;
 	clean_up_tabs(cmd);
 	ret = ft_strsplit(cmd, ' ');
-	while (ret[++i])
-	{
-		printf("ret = %s\n", ret[i]);		
-	}
+	ret = clean_back_line(ret);
 	return (ret);
 }

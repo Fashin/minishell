@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char			*ft_read_standard_input(void)
+char			*read_standard_input(void)
 {
 	char		buff[BUFFSIZE];
 	char		*ret;

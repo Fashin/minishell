@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/11 22:33:06 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/11 21:17:10 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/11 22:32:06 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int					main(int ac, char **av, char **env)
+void		ft_echo(char **params)
 {
-	char		*cmd;
-	t_list		*list;
+	int		i;
+	char	back_line;
 
-	(void)ac;
-	(void)av;
-	list = ft_lstnew(NULL, 0);
-	if (!(save_env(env, &list)))
-		puterror(1, "Error from allocation memory");
-	while (1)
+	i = 0;
+	back_line = '\n';
+	while (params[++i])
 	{
-		ft_putstr("$ > ");
-		cmd = read_standard_input();
-		resolve_command(search_command(cmd), list);
+		if (i == 1 && (ft_strcmp(params[1], "-n") == 0))
+			back_line = '\0';
+		else
+		{
+			ft_putstr_fd(params[i], 0);
+			if (params[i + 1])
+				ft_putchar_fd(' ', 0);
+		}
 	}
-	return (0);
+	ft_putchar_fd(back_line, 0);
+	exit(EXIT_SUCCESS);
 }

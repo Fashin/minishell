@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   puterror.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/11 22:33:06 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/11 16:47:07 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/11 21:11:09 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int					main(int ac, char **av, char **env)
+void		puterror(int stop, char *msg)
 {
-	char		*cmd;
-	t_list		*list;
-
-	(void)ac;
-	(void)av;
-	list = ft_lstnew(NULL, 0);
-	if (!(save_env(env, &list)))
-		puterror(1, "Error from allocation memory");
-	while (1)
-	{
-		ft_putstr("$ > ");
-		cmd = read_standard_input();
-		resolve_command(search_command(cmd), list);
-	}
-	return (0);
+	ft_putstr_fd(msg, 2);
+	ft_putchar_fd('\n', 2);
+	if (stop)
+		exit(-1);
 }
