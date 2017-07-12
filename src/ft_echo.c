@@ -31,5 +31,4 @@ void		ft_echo(char **params)
 		}
 	}
 	ft_putchar_fd(back_line, 0);
-	exit(EXIT_SUCCESS);
 }

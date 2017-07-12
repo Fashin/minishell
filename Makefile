@@ -17,7 +17,7 @@ CFLAGS += -Wall -Wextra -Werror -g
 SRCS = 	minishell.c read_standard_input.c search_command.c \
  		puterror.c save_env.c resolve_command.c get_path.c \
 		path_cmd.c exec_interne.c convert_env.c ft_echo.c \
-		ft_exit.c
+		ft_exit.c ft_cd.c
 
 LIB = ./libft/libft.a
 CC = @cc
@@ -27,6 +27,7 @@ OBJ = $(SRC:.c=.o)
 # COLOR
 C_GOOD = "\033[32m"
 C_DURING = "\033[36m"
+RESET = "\033[00m"
 
 # MESSAGE
 SUCCESS = $(C_GOOD)COMPILATION SUCCEEDED
@@ -37,7 +38,7 @@ $(NAME): $(OBJ)
 	@make re -C libft/
 	@echo $(C_DURING)"Compiling" [ $(NAME) . . . ]
 	$(CC) $(OBJ) $(LIB) -o $(NAME)
-	@echo $(SUCCESS)
+	@echo $(SUCCESS) $(RESET)
 
 cc:
 		$(CC) -g $(OBJ) $(LIB) -o $(NAME)
@@ -45,11 +46,11 @@ cc:
 clean:
 		@/bin/rm -f $(OBJ)
 		@make clean -C libft/
-		@echo $(C_GOOD)".o FILES DELETED"
+		@echo $(C_GOOD)".o FILES DELETED" $(RESET)
 
 fclean: clean
 		@/bin/rm -f $(NAME)
 		@make fclean -C libft/
-		@echo $(C_GOOD)"EXECUTABLE FILE DELETED"
+		@echo $(C_GOOD)"EXECUTABLE FILE DELETED" $(RESET)
 
 re: fclean all

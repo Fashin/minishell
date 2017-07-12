@@ -36,7 +36,8 @@ void					puterror(int stop, char *msg);
 void					exec_interne(char *cmd, char **params, t_list *list);
 void					ft_echo(char **params);
 void					ft_exit(char *cmd, char **params, t_list *list, int stop);
-int						resolve_command(char **cmds, t_list *list);
-int						save_env(char **env, t_list **list);
+void					ft_cd(void);
+int					resolve_command(char **cmds, t_list *list);
+int					save_env(char **env, t_list **list);
 
 #endif

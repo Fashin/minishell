@@ -18,4 +18,8 @@ void		exec_interne(char *cmd, char **params, t_list *list)
 	(void)list;
 	if (ft_strcmp(params[0], "echo") == 0)
 		ft_echo(params);
+	else if (ft_strcmp(params[0], "") == 0)
+		ft_cd();
+	ft_exit(cmd, params, NULL, 0);
+	exit(EXIT_SUCCESS);
 }
