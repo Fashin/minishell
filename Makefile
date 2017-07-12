@@ -6,7 +6,7 @@
 #    By: cbeauvoi <cbeauvoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/14 11:08:40 by cbeauvoi          #+#    #+#              #
-#    Updated: 2017/07/11 21:39:03 by cbeauvoi         ###   ########.fr        #
+#    Updated: 2017/07/12 20:08:25 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME = a.out
 CFLAGS += -Wall -Wextra -Werror -g
 
 SRCS = 	minishell.c read_standard_input.c search_command.c \
- 		puterror.c save_env.c resolve_command.c get_path.c \
+ 		puterror.c save_env.c resolve_command.c get_value.c \
 		path_cmd.c exec_interne.c convert_env.c ft_echo.c \
-		ft_exit.c ft_cd.c
+		ft_exit.c ft_cd.c list_update.c
 
 LIB = ./libft/libft.a
 CC = @cc

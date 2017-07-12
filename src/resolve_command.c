@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/11 22:32:51 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/12 19:24:41 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		*check_real_cmd(char **cmds, t_list *list, char **error)
 	auth_cmd = ft_strsplit(BUILTINS, ';');
 	if (ft_arraychr(auth_cmd, cmds[0]))
 		return (ft_strjoin("./src/", cmds[0]));
-	else if ((tmp = path_cmd(get_path(list), cmds[0])) != NULL)
+	else if ((tmp = path_cmd(get_value(list, "PATH"), cmds[0])) != NULL)
 		return (tmp);
 	else
 	{
@@ -39,12 +39,7 @@ static int		execute_cmd(char *cmd, char **params, t_list *list)
 	pid = fork();
 	status = 0;
 	if (!pid)
-	{
-		if (ft_strcmp(ft_strjoin("./src/", params[0]), cmd) == 0)
-			exec_interne(cmd, params, list);
-		else
-			execve(cmd, params, convert_env(list));
-	}
+		execve(cmd, params, convert_env(list));
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
 	printf("status = %d\n", status);
@@ -62,10 +57,10 @@ int				resolve_command(char **cmds, t_list *list)
 		puterror(0, error);
 	else
 	{
-		if (ft_strcmp(ret, "./src/exit") == 0)
-			ft_exit(ret, cmds, list, 1);
+		if (ft_arraychr(ft_strsplit(BUILTINS, ';'), cmds[0]))
+			exec_interne(cmds[0], cmds, list);
 		else
-			return (execute_cmd(ret, cmds, list));
+			execute_cmd(ret, cmds, list);
 	}
 	return (0);
 }

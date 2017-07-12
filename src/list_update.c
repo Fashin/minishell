@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_interne.c                                     :+:      :+:    :+:   */
+/*   list_update.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 20:58:28 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/12 20:05:59 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/12 20:04:41 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/12 20:12:40 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		exec_interne(char *cmd, char **params, t_list *list)
+void		list_update(char *name, char *new_value, t_list **list)
 {
-	(void)cmd;
-	(void)list;
-	if (ft_strcmp(params[0], "echo") == 0)
-		ft_echo(params);
-	else if (ft_strcmp(params[0], "exit") == 0)
-		ft_exit(cmd, params, list, 1);
-	else if (ft_strcmp(params[0], "cd") == 0)
-		ft_cd(params, &list);
+	t_env		*env;
+	t_list		**tmp;
+
+	(void)new_value;
+	tmp = list;
+	while ((*tmp)->content)
+	{
+		env = (t_env *)(*tmp)->content;
+		if (ft_strcmp(env->name, name) == 0)
+			list_remove(tmp, list);
+		(*tmp) = (*tmp)->next;
+	}
 }
