@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/12 20:05:51 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/13 18:31:51 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct			s_env
 		char			*value;
 }						t_env;
 
+t_list					*list_remove(t_list *list, char *name);
+t_list					*list_update(char *name, char *new_value, t_list *list);
 char					**search_command(char *str);
 char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
@@ -37,7 +39,6 @@ void					puterror(int stop, char *msg);
 void					exec_interne(char *cmd, char **params, t_list *list);
 void					ft_echo(char **params);
 void					ft_exit(char *cmd, char **params, t_list *list, int stop);
-void					list_update(char *name, char *new_value, t_list **list);
 void					ft_cd(char **params, t_list **list);
 int						resolve_command(char **cmds, t_list *list);
 int						save_env(char **env, t_list **list);

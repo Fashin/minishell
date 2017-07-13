@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 18:21:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/12 20:08:03 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/13 18:33:49 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void				ft_cd(char **params, t_list **list)
 	char		*tmp;
 	char		*error;
 
-	list_update("OLDPWD", getcwd(buff, BUFFPATH - 1), list);
+	(*list) = list_update("OLDPWD", getcwd(buff, BUFFPATH - 1), (*list));
 	error = ft_strjoin("cb_sh : no such file or directory: ", params[1]);
 	tmp = clean_spaces(params[1], (*list));
 	if (chdir(tmp) > 0)
 		puterror(0, error);
-	list_update("PWD", getcwd(buff, BUFFPATH - 1), list);
+	(*list) = list_update("PWD", getcwd(buff, BUFFPATH - 1), (*list));
 }
