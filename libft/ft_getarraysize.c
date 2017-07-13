@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_getarraysize.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 19:38:38 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/13 22:38:25 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/13 22:40:03 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-int					main(int ac, char **av, char **env)
+size_t			ft_getarraysize(char **tab)
 {
-	char		*cmd;
-	t_list		*list;
+	size_t		i;
 
-	(void)ac;
-	(void)av;
-	list = ft_lstnew(NULL, 0);
-	if (!(save_env(env, &list)))
-		puterror(1, "Error from allocation memory");
-	while (1)
-	{
-		ft_putstr("$ > ");
-		cmd = read_standard_input();
-		list = resolve_command(search_command(cmd), list);
-	}
-	return (0);
+	i = -1;
+	while (tab[++i]);
+	return (i);
 }

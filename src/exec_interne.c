@@ -6,27 +6,26 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 20:58:28 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 18:35:07 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/13 23:09:35 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		exec_interne(char *cmd, char **params, t_list *list)
+t_list		*exec_interne(char *cmd, char **params, t_list *list)
 {
-	(void)cmd;
-	(void)list;
+
 	if (ft_strcmp(params[0], "echo") == 0)
 		ft_echo(params);
 	else if (ft_strcmp(params[0], "exit") == 0)
 		ft_exit(cmd, params, list, 1);
 	else if (ft_strcmp(params[0], "cd") == 0)
-		ft_cd(params, &list);
-	t_env *env;
-	while (list->content)
-	{
-		env = (t_env *)list->content;
-		printf("%s = %s\n", env->name, env->value);
-		list = list->next;
-	}
+		return (ft_cd(params, &list));
+	else if (ft_strcmp(params[0], "env") == 0)
+		return (env(params, &list));
+	else if (ft_strcmp(params[0], "setenv") == 0)
+		return (set_env(params + 1, list));
+	else if (ft_strcmp(params[0], "unsetenv") == 0)
+		return (unset_env(params + 1, list));
+	return (list);
 }

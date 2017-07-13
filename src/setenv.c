@@ -1,48 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 21:34:26 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 19:42:10 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/13 22:59:54 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/13 23:04:20 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void			free_tab(char **params)
+t_list		*set_env(char **params, t_list *list)
 {
-	int		i;
+	int			i;
+	char		**ret;
+	t_env		*env;
 
+	(void)list;
 	i = -1;
+	if (!(env = (t_env *)malloc(sizeof(t_env))))
+		return (NULL);
 	while (params[++i])
-		ft_strdel(&(params[i]));
-	ft_memdel((void **)&params);
-}
-
-void				free_lst(t_list *list)
-{
-	t_list		*tmp;
-
-	while (list->content)
 	{
-		tmp = list;
-		list = list->next;
-		ft_strdel(tmp->content);
+		ret = ft_strsplit(params[i], '=');
 	}
-}
-
-void				ft_exit(char *cmd, char **params, t_list *list, int stop)
-{
-	ft_strdel(&cmd);
-	free_tab(params);
-	if (list)
-		free_lst(list);
-	if (stop)
-	{
-		ft_putstr_fd("Good Bye ! :)\n", 0);
-		exit(1);
-	}
+	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 18:31:51 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/13 23:09:10 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 # define BUFFSIZE 10
 # define BUFFPATH 1024
-# define BUILTINS "echo;cd;setenv;unsetenv;exit"
+# define BUILTINS "env;echo;cd;setenv;unsetenv;exit"
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -30,17 +30,21 @@ typedef struct			s_env
 
 t_list					*list_remove(t_list *list, char *name);
 t_list					*list_update(char *name, char *new_value, t_list *list);
+t_list					*ft_cd(char **params, t_list **list);
+t_list					*exec_interne(char *cmd, char **params, t_list *list);
+t_list					*resolve_command(char **cmds, t_list *list);
+t_list					*env(char **params, t_list **list);
+t_list					*set_env(char **params, t_list *list);
+t_list					*unset_env(char **params, t_list *list);
 char					**search_command(char *str);
 char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
 char					*read_standard_input(void);
 char					*path_cmd(char *path, char *cmd);
 void					puterror(int stop, char *msg);
-void					exec_interne(char *cmd, char **params, t_list *list);
 void					ft_echo(char **params);
 void					ft_exit(char *cmd, char **params, t_list *list, int stop);
-void					ft_cd(char **params, t_list **list);
-int						resolve_command(char **cmds, t_list *list);
+void					free_lst(t_list *list);
 int						save_env(char **env, t_list **list);
 
 #endif

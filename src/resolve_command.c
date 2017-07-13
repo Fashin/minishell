@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/12 19:24:41 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/13 22:56:36 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ static int		execute_cmd(char *cmd, char **params, t_list *list)
 		execve(cmd, params, convert_env(list));
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
-	printf("status = %d\n", status);
-	return (1);
+	return (status);
 }
 
-int				resolve_command(char **cmds, t_list *list)
+t_list			*resolve_command(char **cmds, t_list *list)
 {
 	char	*ret;
 	char	*error;
@@ -58,9 +57,9 @@ int				resolve_command(char **cmds, t_list *list)
 	else
 	{
 		if (ft_arraychr(ft_strsplit(BUILTINS, ';'), cmds[0]))
-			exec_interne(cmds[0], cmds, list);
+			return (exec_interne(cmds[0], cmds, list));
 		else
 			execute_cmd(ret, cmds, list);
 	}
-	return (0);
+	return (list);
 }
