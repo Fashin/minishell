@@ -6,13 +6,13 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 22:56:36 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/19 23:23:27 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*check_real_cmd(char **cmds, t_list *list, char **error)
+static char		*check_real_cmd(char **cmds, t_list *list)
 {
 	int			i;
 	char		*tmp;
@@ -26,7 +26,7 @@ static char		*check_real_cmd(char **cmds, t_list *list, char **error)
 		return (tmp);
 	else
 	{
-		(*error) = ft_strjoin("cb_sh : command not found : ", cmds[0]);
+		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
 		return (NULL);
 	}
 }
@@ -48,18 +48,17 @@ static int		execute_cmd(char *cmd, char **params, t_list *list)
 t_list			*resolve_command(char **cmds, t_list *list)
 {
 	char	*ret;
-	char	*error;
 
-	error = NULL;
-	ret = check_real_cmd(cmds, list, &error);
-	if (error)
-		puterror(0, error);
+	ret = check_real_cmd(cmds, list);
+	if (!(ret))
+		puterror(0, cmds[0]);
 	else
 	{
 		if (ft_arraychr(ft_strsplit(BUILTINS, ';'), cmds[0]))
-			return (exec_interne(cmds[0], cmds, list));
+			return (exec_interne(cmds, list));
 		else
 			execute_cmd(ret, cmds, list);
 	}
+	ft_strdel(&ret);
 	return (list);
 }

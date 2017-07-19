@@ -6,7 +6,7 @@
 #    By: cbeauvoi <cbeauvoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/14 11:08:40 by cbeauvoi          #+#    #+#              #
-#    Updated: 2017/07/13 23:10:14 by cbeauvoi         ###   ########.fr        #
+#    Updated: 2017/07/19 18:46:48 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,3 +55,7 @@ fclean: clean
 		@echo $(C_GOOD)"EXECUTABLE FILE DELETED" $(RESET)
 
 re: fclean all
+
+leak: fclean $(OBJ)
+	@make re -C libft/
+	$(CC) $(OBJ) $(LIB) -g -o $(NAME)

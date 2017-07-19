@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:59:54 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 23:07:28 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/19 22:21:59 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_list		*set_env(char **params, t_list *list)
 	char		**ret;
 	t_env		*env;
 
-	(void)list;
 	i = -1;
 	if (!(env = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);

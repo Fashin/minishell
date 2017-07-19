@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:17:56 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 18:15:56 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/19 22:41:05 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			save_env(char **env, t_list **list)
 	t_env		*set_env;
 
 	i = -1;
-	if (!(set_env = (t_env *)malloc(sizeof(t_env))))
+	if (!(set_env = (t_env *)malloc(sizeof(t_env) * 16)))
 		return (0);
 	while (env[++i])
 	{
@@ -28,5 +28,6 @@ int			save_env(char **env, t_list **list)
 		set_env->value = ft_strdup(tmp[1]);
 		ft_lstadd(list, ft_lstnew((void *)set_env, sizeof(t_env) * 2));
 	}
+	free(set_env);
 	return (1);
 }

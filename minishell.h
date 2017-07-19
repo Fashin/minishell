@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 23:09:10 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/19 23:25:00 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define BUFFSIZE 10
 # define BUFFPATH 1024
 # define BUILTINS "env;echo;cd;setenv;unsetenv;exit"
+# define NF_CMD "cb_zsh : command not found : "
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -31,7 +32,7 @@ typedef struct			s_env
 t_list					*list_remove(t_list *list, char *name);
 t_list					*list_update(char *name, char *new_value, t_list *list);
 t_list					*ft_cd(char **params, t_list **list);
-t_list					*exec_interne(char *cmd, char **params, t_list *list);
+t_list					*exec_interne(char **params, t_list *list);
 t_list					*resolve_command(char **cmds, t_list *list);
 t_list					*env(char **params, t_list **list);
 t_list					*set_env(char **params, t_list *list);
@@ -43,7 +44,7 @@ char					*read_standard_input(void);
 char					*path_cmd(char *path, char *cmd);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
-void					ft_exit(char *cmd, char **params, t_list *list, int stop);
+void					ft_exit(char **params, t_list *list, int stop);
 void					free_lst(t_list *list);
 int						save_env(char **env, t_list **list);
 

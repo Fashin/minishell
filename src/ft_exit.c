@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 21:34:26 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 19:42:10 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/19 23:25:44 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static void			free_tab(char **params)
 	int		i;
 
 	i = -1;
+	if (!(params))
+		return ;
 	while (params[++i])
-		ft_strdel(&(params[i]));
+		ft_strdel(&params[i]);
 	ft_memdel((void **)&params);
 }
 
@@ -34,9 +36,8 @@ void				free_lst(t_list *list)
 	}
 }
 
-void				ft_exit(char *cmd, char **params, t_list *list, int stop)
+void				ft_exit(char **params, t_list *list, int stop)
 {
-	ft_strdel(&cmd);
 	free_tab(params);
 	if (list)
 		free_lst(list);
