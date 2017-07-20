@@ -1,20 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_standard_input.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/20 21:05:20 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/20 21:17:48 by cbeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char			*read_standard_input(void)
 {
-	char		buff[BUFFSIZE];
 	char		*ret;
 	
-	if (!(ret = (char *)malloc(sizeof(char) * BUFFSIZE)))
-		return (NULL);
-	ft_bzero(ret, 1);
-	ft_bzero(buff, BUFFSIZE);
-	while (read(0, buff, BUFFSIZE - 1) > -1)
-	{
-		ret = ft_strjoin(ret, buff);
-		ft_strclr(buff);
-		if (ft_strchr(ret, '\n'))
-			return (ret);
-	}
-	return (NULL);
+	printf("%d\n", get_next_line(0, &ret));
+	return (ret);
 }

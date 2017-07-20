@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 19:05:18 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 22:56:43 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 22:01:09 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void			insert_exec_new_env(char **params, t_list *list)
 
 t_list				*env(char **params, t_list **list)
 {
-	if (params[1] == NULL)
+	if (!(params[1]))
 		return (print_env((*list)));
 	else
 		insert_exec_new_env(params, (*list));

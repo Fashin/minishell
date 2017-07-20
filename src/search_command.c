@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 21:55:32 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 21:12:50 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ static char		**clean_back_line(char **str)
 char			**search_command(char *cmd)
 {
 	char	**ret;
-	int	i;
 
-	i = -1;
 	ret = NULL;
 	clean_up_tabs(cmd);
 	ret = ft_strsplit(cmd, ' ');
 	ret = clean_back_line(ret);
+	ft_strclr(cmd);
 	return (ret);
 }

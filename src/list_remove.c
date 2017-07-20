@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 20:12:45 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 18:24:06 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:46:59 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list		*list_remove(t_list *list, char *name)
 	{
 		env = (t_env *)list->content;
 		if (!(ft_strcmp(env->name, name) == 0))
-			ft_lstadd(&ret, ft_lstnew((void *)env, sizeof(t_env) * 2));
+			ft_lstadd(&ret, ft_lstnew((void *)env, sizeof(*env)));
 		list = list->next;
 	}
 	return (ret);

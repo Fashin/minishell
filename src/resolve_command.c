@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/19 23:23:27 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 22:17:18 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,17 @@
 
 static char		*check_real_cmd(char **cmds, t_list *list)
 {
-	int			i;
-	char		*tmp;
+	char		*ret;
 	char		**auth_cmd;
 
-	i = -1;
 	auth_cmd = ft_strsplit(BUILTINS, ';');
-	if (ft_arraychr(auth_cmd, cmds[0]))
-		return (ft_strjoin("./src/", cmds[0]));
-	else if ((tmp = path_cmd(get_value(list, "PATH"), cmds[0])) != NULL)
-		return (tmp);
-	else
-	{
+	if ((ret = ft_arraychr(auth_cmd, cmds[0])))
+		cmds[0] = ft_strjoin("ft_", cmds[0]);
+	ret = (!(ret)) ? path_cmd(get_value(list, "PATH"), cmds[0]) : ret;
+	if (!(ret))
 		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
-		return (NULL);
-	}
+	free_tab(auth_cmd);
+	return (ret);
 }
 
 static int		execute_cmd(char *cmd, char **params, t_list *list)
@@ -54,7 +50,8 @@ t_list			*resolve_command(char **cmds, t_list *list)
 		puterror(0, cmds[0]);
 	else
 	{
-		if (ft_arraychr(ft_strsplit(BUILTINS, ';'), cmds[0]))
+		printf("asked cmd = %s\n", cmds[0]);
+		if (ft_strnstr(cmds[0], "ft_", 3))
 			return (exec_interne(cmds, list));
 		else
 			execute_cmd(ret, cmds, list);

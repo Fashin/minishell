@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/19 23:17:11 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 21:19:27 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int					main(int ac, char **av, char **env)
 	while (1)
 	{
 		ft_putstr("$ > ");
-		cmd = read_standard_input();
+		get_next_line(0, &cmd);
 		list = resolve_command(search_command(cmd), list);
+		ft_strclr(cmd);
 	}
 	return (0);
 }

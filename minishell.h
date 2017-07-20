@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/19 23:25:00 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 22:12:00 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define BUFFPATH 1024
 # define BUILTINS "env;echo;cd;setenv;unsetenv;exit"
 # define NF_CMD "cb_zsh : command not found : "
+# define NF_ENV "cb_zsh : can't find home directory"
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -40,12 +41,12 @@ t_list					*unset_env(char **params, t_list *list);
 char					**search_command(char *str);
 char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
-char					*read_standard_input(void);
 char					*path_cmd(char *path, char *cmd);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);
 void					free_lst(t_list *list);
+void					free_tab(char **params);
 int						save_env(char **env, t_list **list);
 
 #endif

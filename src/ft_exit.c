@@ -6,13 +6,13 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 21:34:26 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/19 23:25:44 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/20 22:15:26 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void			free_tab(char **params)
+void				free_tab(char **params)
 {
 	int		i;
 
@@ -28,17 +28,19 @@ void				free_lst(t_list *list)
 {
 	t_list		*tmp;
 
+	tmp = list;
 	while (list->content)
 	{
 		tmp = list;
 		list = list->next;
-		ft_strdel(tmp->content);
+		free(tmp);
 	}
 }
 
 void				ft_exit(char **params, t_list *list, int stop)
 {
-	free_tab(params);
+	if (params)
+		free_tab(params);
 	if (list)
 		free_lst(list);
 	if (stop)
