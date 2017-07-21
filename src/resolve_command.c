@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/20 22:17:18 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/21 15:37:46 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_list			*resolve_command(char **cmds, t_list *list)
 		puterror(0, cmds[0]);
 	else
 	{
-		printf("asked cmd = %s\n", cmds[0]);
 		if (ft_strnstr(cmds[0], "ft_", 3))
 			return (exec_interne(cmds, list));
 		else
