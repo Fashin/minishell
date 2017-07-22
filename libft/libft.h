@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 12:41:11 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 22:40:31 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 17:10:43 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void					ft_putstr_fd(char const *str, int fd);
 void					ft_putendl_fd(char const *str, int fd);
 void					ft_putnbr_fd(int n, int fd);
 char					*ft_strnchr(char *str, int c);
+char					*put_maj(char *str);
 char					*ft_itoa(int n);
 char					*ft_strtrim(char const *s);
 char					*ft_strjoin(char const *s1, char const *s2);
