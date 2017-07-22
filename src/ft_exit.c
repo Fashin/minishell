@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 21:34:26 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/20 22:15:26 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 21:57:27 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ void				free_lst(t_list *list)
 		list = list->next;
 		free(tmp);
 	}
+}
+
+void				free_super_tab(char ***tab)
+{
+	int		i;
+
+	i = -1;
+	while (tab[++i])
+		free_tab(tab[i]);
+	tab = NULL;
 }
 
 void				ft_exit(char **params, t_list *list, int stop)

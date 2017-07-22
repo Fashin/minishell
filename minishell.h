@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 17:45:51 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:27:50 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define NF_CMD "cb_zsh : command not found : "
 # define NF_ENV "cb_zsh : can't find home directory"
 # define NF_COLOR "cb_zsh : can't find this color\n"
+# define NF_ACCESS "cb_zsh can't access to this executable"
 # define RED "\e[31m"
 # define GREEN "\e[32m"
 # define YELLOW "\e[33m"
@@ -39,6 +40,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <sys/stat.h>
 
 typedef struct			s_env
 {
@@ -54,19 +56,22 @@ t_list					*resolve_command(char **cmds, t_list *list);
 t_list					*env(char **params, t_list **list);
 t_list					*set_env(char **params, t_list *list);
 t_list					*unset_env(char **params, t_list *list);
-char					**search_command(char *str);
+t_list					*search_command(char *cmd, t_list *list);
+t_list					*set_params(char *str, int interne, t_list *list);
+t_list					*ft_prompt(t_list *list);
+t_list					*set_prompt(char **av, t_list *list);
 char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*is_color(char *str);
+char					*check_pers_cmd(char *str);
+void					free_super_tab(char ***tab);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);
 void					free_lst(t_list *list);
 void					free_tab(char **params);
-void					set_prompt(char **av);
-void					set_params(char *str, int interne);
-void					ft_prompt(void);
+void					save_cmd(char **cmds, t_list *list);
 int						save_env(char **env, t_list **list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:17:56 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 16:49:37 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:06:47 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int			create_my_env(t_list **list)
 	free(env);
 	return (1);
 }
-
 
 int					save_env(char **env, t_list **list)
 {

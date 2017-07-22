@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 19:05:18 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/20 22:01:09 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:39:06 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_list		*print_env(t_list *list)
 {
-	t_env		*env;
-	t_list		*tmp;
+	t_env			*env;
+	t_list			*tmp;
 
 	tmp = list;
 	while (tmp->content)
@@ -30,20 +30,14 @@ static t_list		*print_env(t_list *list)
 	return (list);
 }
 
-
 static void			insert_exec_new_env(char **params, t_list *list)
 {
-	t_env		*env;
 	char		**data;
 
-	if (!(env = (t_env *)malloc(sizeof(t_env))))
-		return ;
 	data = ft_strsplit(params[1], '=');
 	if (data[0] && data[1])
 	{
-		env->name = ft_strdup(data[0]);
-		env->value = ft_strdup(data[1]);
-		ft_lstadd(&list, ft_lstnew((void *)env, sizeof(t_env) * 2));
+		list_update(data[0], data[1], list);
 		if (!(params[2]))
 			print_env(list);
 		else

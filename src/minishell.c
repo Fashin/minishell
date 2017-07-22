@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 17:45:14 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:28:12 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int					main(int ac, char **av, char **env)
 	char		*cmd;
 	t_list		*list;
 
-	if (ac > 1)
-		set_prompt(av);
 	list = ft_lstnew(NULL, 0);
+	if (ac > 1)
+		list = set_prompt(av, list);
 	if (!(save_env(env, &list)))
 		puterror(1, "Error from allocation memory");
 	while (1)
 	{
-		ft_prompt();
+		ft_prompt(list);
 		get_next_line(0, &cmd);
-		list = resolve_command(search_command(cmd), list);
+		list = search_command(cmd, list);
 		ft_strclr(cmd);
 	}
 	return (0);

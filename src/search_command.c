@@ -6,15 +6,15 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 16:43:58 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:03:18 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*clean_up_tabs(char *str)
+static char			*clean_up_tabs(char *str)
 {
-	int		i;
+	int			i;
 	size_t		length;
 	char		*tmp;
 
@@ -30,7 +30,7 @@ static char		*clean_up_tabs(char *str)
 	return (str);
 }
 
-static char		**clean_back_line(char **str)
+static char			**clean_back_line(char **str)
 {
 	int			i;
 	size_t		length;
@@ -45,14 +45,26 @@ static char		**clean_back_line(char **str)
 	return (str);
 }
 
-char			**search_command(char *cmd)
+t_list				*search_command(char *cmd, t_list *list)
 {
+	char	**tmp;
 	char	**ret;
+	int		i;
 
-	ret = NULL;
 	clean_up_tabs(cmd);
-	ret = ft_strsplit(cmd, ' ');
-	ret = clean_back_line(ret);
+	ret = NULL;
+	if (ft_strstr(cmd, ";"))
+	{
+		i = -1;
+		tmp = ft_strsplit(cmd, ';');
+		while (tmp[++i])
+		{
+			ret = clean_back_line(ft_strsplit(tmp[i], ' '));
+			list = resolve_command(ret, list);
+		}
+	}
+	else
+		list = resolve_command(clean_back_line(ft_strsplit(cmd, ' ')), list);
 	ft_strclr(cmd);
-	return (ret);
+	return (list);
 }

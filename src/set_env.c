@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:59:54 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/20 18:52:47 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:36:25 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,13 @@ t_list		*set_env(char **params, t_list *list)
 {
 	int			i;
 	char		**ret;
-	t_env		*env;
 
 	i = -1;
-	if (!(env = (t_env *)malloc(sizeof(*env))))
-		return (NULL);
 	while (params[++i])
 	{
 		ret = ft_strsplit(params[i], '=');
 		if (ret[0] && ret[1])
-		{
-			env->name = ft_strdup(ret[0]);
-			env->value = ft_strdup(ret[1]);
-			ft_lstadd(&list, ft_lstnew((void *)env, sizeof(*env)));
-		}
+			list = list_update(ret[0], ret[1], list);
 	}
 	return (list);
 }

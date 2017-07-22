@@ -6,44 +6,54 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 16:51:13 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 17:47:28 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/22 22:28:00 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*prompt_color = NULL;
-
-void		ft_prompt(void)
+t_list			*ft_prompt(t_list *list)
 {
-	(!(prompt_color)) ? ft_putstr(LIGHT_GRAY) : ft_putstr(prompt_color);
+	ft_putstr(get_value(list, "COLOR"));
 	ft_putstr("$ > ");
 	ft_putstr(LIGHT_GRAY);
+	return (list);
 }
 
-void			set_params(char *str, int interne)
+t_list			*set_params(char *str, int interne, t_list *list)
 {
 	char		**params;
+	char		*ret;
 
 	params = ft_strsplit(str, '=');
 	if (params[0] && params[1])
 	{
 		if (!(ft_strcmp(params[0], "set-prompt-color")))
-			if (!(prompt_color = is_color(params[1])))
-				ft_putstr(ft_strjoin(RED, NF_COLOR));
+		{
+			if (!(ret = is_color(params[1])))
+				ft_putstr(NF_COLOR);	
+			else
+				list = list_update("COLOR", ret, list);
+		}
 	}
 	else if (interne)
-		if (!(prompt_color = is_color(str)))
+	{
+		if (!(ret = is_color(str)))
 			ft_putstr(ft_strjoin(RED, NF_COLOR));
+		else
+			list = list_update("COLOR", ret, list);
+	}
 	free_tab(params);
+	return (list);
 }
 
-void		set_prompt(char **av)
+t_list			*set_prompt(char **av, t_list *list)
 {
 	int		i;
 
 	i = 0;
 	while (av[++i])
 		if (av[i][0] == '-' && av[i][1] == '-')
-			set_params(av[i] + 2, 0);
+			list = set_params(av[i] + 2, 0, list);
+	return (list);
 }
