@@ -6,20 +6,20 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 22:39:40 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/23 22:06:58 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*check_real_cmd(char **cmds, t_list *list)
+static char		*check_real_cmd(char **cmds, t_list *list, int *intern)
 {
 	char		*ret;
 	char		**auth_cmd;
 
 	auth_cmd = ft_strsplit(BUILTINS, ';');
 	if ((ret = ft_arraychr(auth_cmd, cmds[0])))
-		cmds[0] = ft_strjoin("ft_", cmds[0]);
+		*intern = 1;
 	ret = (!(ret)) ? path_cmd(get_value(list, "PATH"), cmds[0]) : ret;
 	ret = (!(ret)) ? check_pers_cmd(cmds[0]) : ret;
 	if (!(ret))
@@ -35,23 +35,27 @@ static int		execute_cmd(char *cmd, char **params, t_list *list)
 
 	pid = fork();
 	status = 0;
-	if (!pid)
-		execve(cmd, params, convert_env(list));
-	else if (pid > 0)
+	if (pid > 0)
 		waitpid(pid, &status, 0);
+	if (pid == 0)
+		execve(cmd, params, convert_env(list));
+	ft_strclr(cmd);
+	free_tab(params);
 	return (status);
 }
 
 t_list			*resolve_command(char **cmds, t_list *list)
 {
 	char	*ret;
+	int		intern;
 
-	ret = check_real_cmd(cmds, list);
+	intern = 0;
+	ret = check_real_cmd(cmds, list, &intern);
 	if (!(ret))
 		puterror(0, cmds[0]);
 	else
 	{
-		if (ft_strnstr(cmds[0], "ft_", 3))
+		if (intern)
 			list = exec_interne(cmds, list);
 		else
 			execute_cmd(ret, cmds, list);

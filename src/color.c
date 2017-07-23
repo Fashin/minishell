@@ -6,48 +6,35 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 17:01:06 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 17:35:56 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/23 17:21:00 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char			*check_other_color(char *str)
+char				*get_color(char *name, char **ret)
 {
-	if (!(ft_strcmp(str, "LIGHT_YELLOW")))
-		return (LIGHT_YELLOW);
-	else if (!(ft_strcmp(str, "LIGHT_BLUE")))
-		return (LIGHT_BLUE);
-	else if (!(ft_strcmp(str, "LIGHT_MAGENTA")))
-		return (LIGHT_MAGENTA);
-	else if (!(ft_strcmp(str, "LIGHT_CYAN")))
-		return (LIGHT_CYAN);
-	return (NULL);
-}
+	char	colors[16][2][13] = {
+		{"RED", "\e[31m"},
+		{"GREEN", "\e[32m"},
+		{"YELLOW", "\e[33m"},
+		{"BLUE", "\e[34m"},
+		{"MAGENTA", "\e[35m"},
+		{"CYAN", "\e[36m"},
+		{"LIGHT_GRAY", "\e[37m"},
+		{"LIGHT_RED", "\e[91m"},
+		{"LIGHT_GREEN", "\e[92m"},
+		{"LIGHT_YELLOW", "\e[93m"},
+		{"LIGHT_BLUE", "\e[94m"},
+		{"LIGHT_CYAN", "\e[96m"},
+	};
+	int		i;
 
-char				*is_color(char *str)
-{
-	str = put_maj(str);
-	if (!(ft_strcmp(str, "RED")))
-		return (RED);
-	else if (!(ft_strcmp(str, "GREEN")))
-		return (GREEN);
-	else if (!(ft_strcmp(str, "YELLOW")))
-		return (YELLOW);
-	else if (!(ft_strcmp(str, "BLUE")))
-		return (BLUE);
-	else if (!(ft_strcmp(str, "MAGENTA")))
-		return (MAGENTA);
-	else if (!(ft_strcmp(str, "CYAN")))
-		return (CYAN);
-	else if (!(ft_strcmp(str, "LIGHT_GRAY")))
-		return (LIGHT_GRAY);
-	else if (!(ft_strcmp(str, "DARK_GRAY")))
-		return (DARK_GRAY);
-	else if (!(ft_strcmp(str, "LIGHT_RED")))
-		return (LIGHT_RED);
-	else if (!(ft_strcmp(str, "LIGHT_GREEN")))
-		return (LIGHT_GREEN);
-	else
-		return (check_other_color(str));
+	i = -1;
+	while (++i < 15)
+		if (!(ft_strcmp(colors[i][0], name))
+			&& ((*ret) = ft_strdup(colors[i][0])) != NULL)
+			return (ft_strdup(colors[i][1]));
+	(*ret) = NULL;
+	return ("\e[37m");
 }

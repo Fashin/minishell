@@ -1,2 +1,2 @@
-make re
-valgrind -v --leak-check=full --track-origins=yes --show-leak-kinds=all ./a.out
+make leak
+valgrind -v --leak-check=full --track-origins=yes ./a.out

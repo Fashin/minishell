@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 20:04:41 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 22:05:19 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/23 22:15:16 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_list		*list_update(char *name, char *new_value, t_list *list)
 		env->value = ft_strdup(new_value);
 		ft_lstadd(&list, ft_lstnew((void *)env, sizeof(*env)));
 	}
+	free(env);
 	return (list);
 }

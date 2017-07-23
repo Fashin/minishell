@@ -5,96 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/22 18:19:06 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/22 18:19:07 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/07/23 22:21:33 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/07/23 23:03:25 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
-static t_ct		*ft_create_list(t_list **lst, const int fd)
+static char			*clean_back(char *str)
 {
-	t_ct		content;
-	t_list		*lst_temp;
+	int			i;
 
-	if (fd < 0 || !lst)
-		return (NULL);
-	lst_temp = *lst;
-	while (lst_temp)
-	{
-		if (((t_ct *)(lst_temp->content))->fd == fd)
-			return (lst_temp->content);
-		lst_temp = lst_temp->next;
-	}
-	content.fd = fd;
-	if (!(content.r_line = ft_strnew(BUFF_SIZE)))
-		return (NULL);
-	if (!(lst_temp = ft_lstnew(&content, sizeof(content))))
-	{
-		free(content.r_line);
-		return (NULL);
-	}
-	ft_lstadd(lst, lst_temp);
-	return ((*lst)->content);
+	i = -1;
+	while (str[++i])
+		if (str[i] != '\n')
+			str[i] = str[i];
+	return (str);
 }
 
-static int		ft_cut_cpy(char **line, char **r_line)
+static int			get_input(int fd, char **line)
 {
-	char		*tmp;
-	int			ret;
+	char		buff[BUFF_SIZE];
+	int			stop;
 
-	ret = 0;
-	if ((tmp = ft_strchr(*r_line, '\n')))
-	{
-		*tmp = '\0';
-		if (!(*line = ft_strdup(*r_line)))
-			return (-1);
-		tmp++;
-		ft_strcpy(*r_line, tmp);
-		ret = 1;
-	}
-	else if (ft_strlen(*r_line))
-	{
-		if (!(*line = ft_strdup(*r_line)))
-			return (-1);
-		**r_line = '\0';
-		ret = 1;
-	}
-	else if (!(*line = ft_strnew(0)))
+	stop = 0;
+	if (!(*line = (char *)ft_memalloc(sizeof(char) * BUFF_SIZE)))
 		return (-1);
-	return (ret);
-}
-
-static int		read_buffer(t_ct **content)
-{
-	char		curr_line[BUFF_SIZE + 1];
-	char		*tmp;
-	int			ret;
-
-	while (!ft_strchr((*content)->r_line, '\n'))
+	ft_bzero(buff, BUFF_SIZE);
+	while ((read(fd, buff, BUFF_SIZE - 1)) > 0)
 	{
-		ft_bzero(curr_line, BUFF_SIZE + 1);
-		if ((ret = read((*content)->fd, curr_line, BUFF_SIZE)) == -1)
-			return (-1);
-		if (!ret)
-			return (0);
-		tmp = (*content)->r_line;
-		if (!((*content)->r_line = ft_strjoin((*content)->r_line, curr_line)))
-			return (-1);
-		free(tmp);
+		if (ft_strchr(buff, '\n') || ft_strchr(buff, '\0'))
+			stop = 1;
+		*line = (!(*line)) ? buff : ft_strjoin(*line, clean_back(buff));
+		ft_bzero(buff, BUFF_SIZE);
+		if (stop)
+			return (1);
+		else
+			*line = ft_realloc(*line, BUFF_SIZE - 1);
 	}
 	return (1);
 }
 
-int				get_next_line(const int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
-	static t_list	*lst;
-	t_ct			*gnl_content;
-	int				ret;
-
-	if (BUFF_SIZE <= 0 || !line || !(gnl_content = ft_create_list(&lst, fd)))
-		return (-1);
-	if ((ret = read_buffer(&gnl_content)) == -1)
-		return (-1);
-	return (ft_cut_cpy(line, &(gnl_content->r_line)));
+	if (fd >= 0)
+		return (get_input(fd, line));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 22:28:12 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/23 21:31:31 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int					main(int ac, char **av, char **env)
 	{
 		ft_prompt(list);
 		get_next_line(0, &cmd);
-		list = search_command(cmd, list);
+		if (ft_strcmp(cmd, ""))
+			list = search_command(cmd, list);
 		ft_strclr(cmd);
 	}
 	return (0);
