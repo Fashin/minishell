@@ -6,76 +6,70 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:07:33 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/06 17:26:13 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 23:14:38 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static const char	*ft_str_find_next(const char *str, char c, int skip)
-{
-	if (skip)
-		while (*str != '\0' && *str == c)
-			str++;
-	else
-		while (*str != '\0' && *str != c)
-			str++;
-	return (str);
-}
 
-static int			ft_str_count_splits(const char *str, char seps)
+static int		ft_cnt_parts(const char *s, char c)
 {
-	int		i;
+	int		cnt;
+	int		in_substring;
 
-	i = 0;
-	while (*str != '\0')
+	in_substring = 0;
+	cnt = 0;
+	while (*s != '\0')
 	{
-		str = ft_str_find_next(str, seps, 1);
-		if (*str != '\0')
+		if (in_substring == 1 && *s == c)
+			in_substring = 0;
+		if (in_substring == 0 && *s != c)
 		{
-			str = ft_str_find_next(str, seps, 0);
-			i++;
+			in_substring = 1;
+			cnt++;
 		}
+		s++;
 	}
-	return (i);
+	return (cnt);
 }
 
-static char			**ft_tabledel(char **ret, int len)
+static int		ft_wlen(const char *s, char c)
 {
-	int		i;
+	int		len;
 
-	i = 0;
-	while (i < len)
-		free(ret[i]);
-	free(ret);
-	return (NULL);
-}
-
-char				**ft_strsplit(const char *str, char c)
-{
-	char			**ret;
-	int				i;
-	const char		*next;
-
-	if (str == NULL)
-		return (NULL);
-	ret = (char**)malloc(sizeof(char*) * (ft_str_count_splits(str, c) + 1));
-	if (ret == NULL)
-		return (NULL);
-	i = 0;
-	while (*str != '\0')
+	len = 0;
+	while (*s != c && *s != '\0')
 	{
-		str = ft_str_find_next(str, c, 1);
-		if (*str != '\0')
-		{
-			next = ft_str_find_next(str, c, 0);
-			ret[i] = ft_strsub(str, 0, next - str);
-			if (ret[i] == NULL)
-				return (ft_tabledel(ret, i));
-			i++;
-			str = next;
-		}
+		len++;
+		s++;
 	}
-	ret[i] = 0;
-	return (ret);
+	return (len);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**t;
+	int		nb_word;
+	int		index;
+
+	if (s == NULL)
+		return (NULL);
+	index = 0;
+	nb_word = ft_cnt_parts((const char *)s, c);
+	t = (char **)malloc(sizeof(*t) * (ft_cnt_parts((const char *)s, c) + 1));
+	if (t == NULL)
+		return (NULL);
+	while (nb_word--)
+	{
+		while (*s == c && *s != '\0')
+			s++;
+		t[index] = ft_strsub((const char *)s, 0, ft_wlen((const char *)s, c));
+		if (t[index] == NULL)
+			return (NULL);
+		s = s + ft_wlen(s, c);
+		index++;
+	}
+	t[index] = NULL;
+	return (t);
 }

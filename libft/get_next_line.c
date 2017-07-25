@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 22:21:33 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/23 23:03:25 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 23:23:24 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static char			*clean_back(char *str)
 
 	i = -1;
 	while (str[++i])
-		if (str[i] != '\n')
-			str[i] = str[i];
+	{
+		str[i] = (str[i] != '\n') ? str[i] : '\0';
+		if (str[i] == '\0')
+			return (str);
+	}
 	return (str);
 }
 
@@ -30,19 +33,22 @@ static int			get_input(int fd, char **line)
 	int			stop;
 
 	stop = 0;
-	if (!(*line = (char *)ft_memalloc(sizeof(char) * BUFF_SIZE)))
-		return (-1);
+	*line = (char *)ft_memalloc(sizeof(char));
 	ft_bzero(buff, BUFF_SIZE);
+	ft_bzero(*line, sizeof(char));
 	while ((read(fd, buff, BUFF_SIZE - 1)) > 0)
 	{
 		if (ft_strchr(buff, '\n') || ft_strchr(buff, '\0'))
 			stop = 1;
-		*line = (!(*line)) ? buff : ft_strjoin(*line, clean_back(buff));
-		ft_bzero(buff, BUFF_SIZE);
-		if (stop)
-			return (1);
+		if (!(*line))
+			*line = clean_back(buff);
 		else
+			*line = ft_freejoin(*line, clean_back(buff));
+		ft_bzero(buff, BUFF_SIZE);
+		if (!(stop))
 			*line = ft_realloc(*line, BUFF_SIZE - 1);
+		else
+			return (1);
 	}
 	return (1);
 }

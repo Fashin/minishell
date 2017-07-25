@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 16:51:13 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/23 22:17:50 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 18:54:06 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 t_list				*ft_prompt(t_list *list)
 {
-	char		*buff;
 	char		*ret;
+	char		*buff;
 	
-	buff = ft_strnew(sizeof(*buff));
+	buff = NULL;
 	ret = get_value(list, "COLOR");
 	if (!(ret))
 		list = list_update("COLOR", "LIGHT_GRAY", list);
-	ft_putstr(get_color(get_value(list, "COLOR"), &buff));
+	ret = get_color(get_value(list, "COLOR"), &buff);
+	ft_putstr(ret);
 	ft_putstr("$ > ");
 	ft_putstr("\e[37m");
 	ft_strdel(&buff);

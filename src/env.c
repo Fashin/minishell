@@ -6,13 +6,13 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 19:05:18 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 22:39:06 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 23:40:39 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_list		*print_env(t_list *list)
+t_list				*print_env(t_list *list)
 {
 	t_env			*env;
 	t_list			*tmp;

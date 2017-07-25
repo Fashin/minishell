@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/23 19:43:34 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 23:42:20 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void					ft_exit(char **params, t_list *list, int stop);
 void					free_lst(t_list *list);
 void					free_tab(char **params);
 void					save_cmd(char **cmds, t_list *list);
+void					free_env(void *content, size_t size);
 int						save_env(char **env, t_list **list);
 
 #endif

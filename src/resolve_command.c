@@ -6,13 +6,13 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/23 22:06:58 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/25 23:32:03 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*check_real_cmd(char **cmds, t_list *list, int *intern)
+static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 {
 	char		*ret;
 	char		**auth_cmd;
@@ -28,7 +28,7 @@ static char		*check_real_cmd(char **cmds, t_list *list, int *intern)
 	return (ret);
 }
 
-static int		execute_cmd(char *cmd, char **params, t_list *list)
+static int			execute_cmd(char *cmd, char **params, t_list *list)
 {
 	pid_t		pid;
 	int			status;
@@ -39,12 +39,11 @@ static int		execute_cmd(char *cmd, char **params, t_list *list)
 		waitpid(pid, &status, 0);
 	if (pid == 0)
 		execve(cmd, params, convert_env(list));
-	ft_strclr(cmd);
-	free_tab(params);
+	kill(pid, SIGTERM);
 	return (status);
 }
 
-t_list			*resolve_command(char **cmds, t_list *list)
+t_list				*resolve_command(char **cmds, t_list *list)
 {
 	char	*ret;
 	int		intern;
@@ -61,5 +60,6 @@ t_list			*resolve_command(char **cmds, t_list *list)
 			execute_cmd(ret, cmds, list);
 	}
 	ft_strdel(&ret);
+	//free_tab(cmds);
 	return (list);
 }
