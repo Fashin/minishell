@@ -6,27 +6,46 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 20:12:45 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/25 23:45:44 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/26 20:07:22 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_list		*list_remove(t_list *list, char *name)
+static int			check_first_maillon(t_list **list, char *name)
 {
-	t_list		*ret;
+	t_env	*env;
+
+	env = ((t_env *)(*list)->content);
+	if (!(ft_strcmp(env->name, name)))
+	{
+		//free
+		*list = (*list)->next;
+		return (1);
+	}
+	return (0);
+}
+
+
+void			list_remove(t_list **list, char *name)
+{
 	t_list		*tmp;
 	t_env		*env;
 
-	ret = ft_lstnew(NULL, 0);
-	while (list->content)
+	if (check_first_maillon(list, name))
+		return ;
+	tmp = *list;
+	while (tmp->content)
 	{
-		env = (t_env *)list->content;
-		if (ft_strcmp(env->name, name))
+		if (tmp->next->content)
 		{
-			ft_lstadd(&ret, ft_lstnew((void *)env, sizeof(*env)));
+			env = (t_env *)tmp->next->content;
+			if (!(ft_strcmp(env->name, name)))
+			{
+				//free
+				tmp->next = tmp->next->next;
+			}
 		}
-		list = list->next;
+		tmp = tmp->next;
 	}
-	return (ret);
 }

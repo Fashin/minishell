@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/25 23:32:03 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/26 20:47:22 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ t_list				*resolve_command(char **cmds, t_list *list)
 			execute_cmd(ret, cmds, list);
 	}
 	ft_strdel(&ret);
-	//free_tab(cmds);
+	free_tab(cmds);
 	return (list);
 }

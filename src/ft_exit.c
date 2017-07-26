@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 21:34:26 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/25 19:22:52 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/26 22:03:02 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,34 @@ void				free_tab(char **params)
 	if (!(params))
 		return ;
 	while (params[++i])
-		ft_strdel((&params[i]));
+		ft_strdel(&(params[i]));
 	ft_memdel((void **)&params);
 }
 
 void				free_env(void *content, size_t size)
 {
+	t_env		**p;
 
+	p = (t_env **)content;
+	if (p != NULL || *p != NULL)
+		free(*p);
+	*p = NULL;
 	size = 0;
-	ft_strdel(&((t_env *)content)->name);
-	free(content);
 }
 
-void				free_lst(t_list *list)
+void				free_lst(t_list **list)
 {
 	t_list		*tmp;
+	t_list		*tmp2;
 
-	while (list->content)
+	tmp = *list;
+	while (tmp->content)
 	{
-		tmp = list;
-		list = tmp->next;
-		ft_memdel(&(list->content));
-		free(tmp);
+		tmp2 = tmp;
+		tmp = tmp2->next;
+		ft_strdel(&(((t_env *)tmp2->content)->name));
+		ft_strdel(&(((t_env *)tmp2->content)->value));
+		free(tmp2);
 	}
 }
 

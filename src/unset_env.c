@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 23:09:41 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 22:11:10 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/26 19:39:17 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ t_list		*unset_env(char **params, t_list *list)
 
 	i = -1;
 	while (params[++i])
-		list = list_remove(list, params[i]);
+		list_remove(&list, params[i]);
 	return (list);
 }

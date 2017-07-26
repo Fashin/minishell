@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 17:08:44 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/22 17:10:24 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/07/26 20:15:06 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char		*put_maj(char *str)
 	int		i;
 
 	i = -1;
+	if (!(str))
+		return (NULL);
 	while (str[++i])
 		if (str[i] >= 'a' && str[i] <= 'z')
 			str[i] = str[i] - 32;
