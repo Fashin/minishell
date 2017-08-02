@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 19:49:35 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/19 23:20:06 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/02 22:29:37 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_strdel(char **addr)
 {
-	if (!(addr))
+	if (!(addr) && !(*addr))
 		return ;
 	if (*addr)
 	{

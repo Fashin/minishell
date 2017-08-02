@@ -6,28 +6,24 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 19:05:18 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/26 21:55:15 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/02 21:31:22 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_list				*print_env(t_list *list)
+void				print_env(t_list *list)
 {
 	t_env			*env;
-	t_list			*tmp;
 
-	tmp = list;
-	while (tmp->content)
+	while (list->content)
 	{
-		env = (t_env *)tmp->content;
+		env = (t_env *)list->content;
 		ft_putstr(env->name);
 		ft_putchar('=');
 		ft_putendl(env->value);
-		tmp = tmp->next;
+		list = list->next;
 	}
-	//free_lst(&tmp);
-	return (list);
 }
 
 static void			insert_exec_new_env(char **params, t_list *list)
@@ -48,7 +44,7 @@ static void			insert_exec_new_env(char **params, t_list *list)
 t_list				*env(char **params, t_list **list)
 {
 	if (!(params[1]))
-		return (print_env((*list)));
+		print_env((*list));
 	else
 		insert_exec_new_env(params, (*list));
 	return ((*list));
