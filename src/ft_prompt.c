@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 16:51:13 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/26 20:36:17 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:16:42 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_list				*set_params(char *str, int interne, t_list *list)
 	}
 	if (interne)
 		list = save_interne_color(str, ret, list);
-	free_tab(params);
+	free_tab(&params);
 	return (list);
 }
 

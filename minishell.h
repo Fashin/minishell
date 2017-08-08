@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/02 22:25:15 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:14:51 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char					*check_pers_cmd(char *str);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);
-void					free_tab(char **params);
+void					free_tab(char ***params);
 void					save_cmd(char **cmds, t_list *list);
 void					free_env(void *content, size_t size);
 void					list_remove(t_list **list, char *name);

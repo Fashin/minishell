@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/26 20:36:00 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:02:30 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int					main(int ac, char **av, char **env)
 	char		*cmd;
 	t_list		*list;
 
-	list = ft_lstnew(NULL, 0);
+	list = NULL;
+	if (!(list = ft_lstnew(NULL, 0)))
+		return (0);
 	if (!(save_env(env, &list)))
 		puterror(1, "Error from allocation memory");
 	if (ac > 1)

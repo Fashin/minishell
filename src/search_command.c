@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/25 23:25:23 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:15:11 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_list				*search_command(char *cmd, t_list *list)
 		tmp = ft_strsplit(cmd, ';');
 		while (tmp[++i])
 			list = resolve_command(ft_strsplit(tmp[i], ' '), list);
-		free_tab(tmp);
+		free_tab(&tmp);
 	}
 	else
 		list = resolve_command(ft_strsplit(cmd, ' '), list);

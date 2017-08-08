@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/02 21:33:29 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:15:45 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 	ret = (!(ret)) ? check_pers_cmd(cmds[0]) : ret;
 	if (!(ret))
 		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
-	free_tab(auth_cmd);
+	free_tab(&auth_cmd);
 	return (ret);
 }
 
@@ -59,6 +59,8 @@ t_list				*resolve_command(char **cmds, t_list *list)
 		else
 			execute_cmd(ret, cmds, list);
 	}
-	free_tab(cmds);
+	if (!(intern))
+		ft_strdel(&ret);
+	free_tab(&cmds);
 	return (list);
 }

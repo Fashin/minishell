@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:59:54 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/02 22:27:58 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:16:26 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ t_list		*set_env(char **params, t_list *list)
 
 	i = -1;
 	while (params[++i])
-		printf("params[%d] = %s\n", i, params[i]);
-	i = -1;
-	while (params[++i])
 	{
 		ret = ft_strsplit(params[i], '=');
 		if (ret[0] && ret[1])
 		{
 			list = list_update(ret[0], ret[1], list);
-			free_tab(ret);
+			free_tab(&ret);
 		}
 	}
 	return (list);

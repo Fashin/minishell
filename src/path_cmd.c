@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:02:14 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/02 21:26:47 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/08 20:16:02 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char			*path_cmd(char *path, char *cmd)
 		{
 			ft_strdel(&cmd);
 			ret = ft_strdup(tmp[i]);
-			free_tab(tmp);
+			free_tab(&tmp);
 			return (ret);
 		}
 	ft_strdel(&cmd);
-	free_tab(tmp);
+	free_tab(&tmp);
 	return (NULL);
 }
