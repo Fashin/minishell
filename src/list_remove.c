@@ -23,7 +23,6 @@ static int			check_first_maillon(t_list **list, char *name)
 		tmp = *list;
 		*list = (*list)->next;
 		ft_lstdelone(&tmp, &free_env);
-		printf("sizeof maillon = %p\n", tmp);
 		return (1);
 	}
 	return (0);
