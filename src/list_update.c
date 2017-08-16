@@ -17,9 +17,9 @@ t_list		*list_update(char *name, char *new_value, t_list *list)
 	t_list		*new;
 
 	list_remove(&list, name);
-	if (!(new = (t_list *)ft_memalloc(sizeof(t_list))))
+	if (!(new = (t_list *)ft_memalloc(sizeof(*new))))
 		return (NULL);
-	if (!(new->content = (void *)ft_memalloc(sizeof(*env))))
+	if (!(new->content = (void *)ft_memalloc(sizeof(t_env))))
 		return (NULL);
 	((t_env *)new->content)->name = ft_strdup(name);
 	((t_env *)new->content)->value = ft_strdup(new_value);
