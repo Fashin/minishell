@@ -37,7 +37,7 @@ static void			insert_exec_new_env(char **params, t_list *list)
 		if (!(params[2]))
 			print_env(list);
 		else
-			resolve_command(params + 2, list);
+			resolve_command(params + 2, list, 0);
 	}
 }
 

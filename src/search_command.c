@@ -41,11 +41,11 @@ t_list				*search_command(char *cmd, t_list *list)
 		i = -1;
 		tmp = ft_strsplit(cmd, ';');
 		while (tmp[++i])
-			list = resolve_command(ft_strsplit(tmp[i], ' '), list);
+			list = resolve_command(ft_strsplit(tmp[i], ' '), list, 1);
 		free_tab(&tmp);
 	}
 	else
-		list = resolve_command(ft_strsplit(cmd, ' '), list);
+		list = resolve_command(ft_strsplit(cmd, ' '), list, 1);
 	ft_strclr(cmd);
 	return (list);
 }

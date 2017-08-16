@@ -43,7 +43,7 @@ static int			execute_cmd(char *cmd, char **params, t_list *list)
 	return (status);
 }
 
-t_list				*resolve_command(char **cmds, t_list *list)
+t_list				*resolve_command(char **cmds, t_list *list, int clean)
 {
 	char	*ret;
 	int		intern;
@@ -61,6 +61,7 @@ t_list				*resolve_command(char **cmds, t_list *list)
 	}
 	if (!(intern))
 		ft_strdel(&ret);
-	free_tab(&cmds);
+	if (clean)
+		free_tab(&cmds);
 	return (list);
 }

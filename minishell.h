@@ -37,7 +37,7 @@ typedef struct			s_env
 t_list					*list_update(char *name, char *new_value, t_list *list);
 t_list					*ft_cd(char **params, t_list **list);
 t_list					*exec_interne(char **params, t_list *list);
-t_list					*resolve_command(char **cmds, t_list *list);
+t_list					*resolve_command(char **cmds, t_list *list, int clean);
 t_list					*env(char **params, t_list **list);
 t_list					*set_env(char **params, t_list *list);
 t_list					*unset_env(char **params, t_list *list);
