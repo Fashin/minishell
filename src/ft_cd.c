@@ -22,7 +22,7 @@ static char			*clean_spaces(char *str, t_list *list)
 	while (str[++i])
 		if (ft_isalpha(str[i]) || str[i] == '.' || str[i] == '/')
 			return (str + i);
-	return (get_value(list, "HOME"));
+	return ((str[0] == '-') ? get_value(list, "OLDPWD") : get_value(list, "HOME"));
 }
 
 t_list				*ft_cd(char **params, t_list **list)
