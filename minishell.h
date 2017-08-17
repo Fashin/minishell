@@ -19,7 +19,8 @@
 # define NF_CMD "cb_zsh : command not found : "
 # define NF_ENV "cb_zsh : can't find home directory"
 # define NF_COLOR "cb_zsh : can't find this color\n"
-# define NF_ACCESS "cb_zsh can't access to this executable"
+# define NF_ACCESS "cb_zsh : can't access to this executable"
+# define NF_FILE "cb_zsh : no such file or directory "
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -50,6 +51,7 @@ char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*get_color(char *name, char **buff);
 char					*check_pers_cmd(char *str, int *intern);
+char					*convert_special_char(char *str, t_list *list);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);

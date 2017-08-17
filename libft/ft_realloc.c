@@ -12,16 +12,23 @@
 
 #include "libft.h"
 
-char	*ft_realloc(char *str, int size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	char	*save;
+	char	*newptr;
 
-	if (!(save = (char *)ft_memalloc(sizeof(char) * ft_strlen(str))))
+	if (!size && ptr)
+	{
+		if (!(newptr = (char *)malloc(1)))
+			return (NULL);
+		ft_memdel(&ptr);
+		return (newptr);
+	}
+	if (!(newptr = (char *)malloc(size)))
 		return (NULL);
-	ft_memcpy((void *)save, (void *)str, ft_strlen(str));
-	if (!(str = (char *)ft_memalloc(sizeof(char) * size)))
-		return (NULL);
-	ft_memcpy((void *)save, (void *)str, ft_strlen(str));
-	free(save);
-	return (str);
+	if (ptr)
+	{
+		ft_memcpy(newptr, ptr, size);
+		ft_memdel(&ptr);
+	}
+	return (newptr);
 }
