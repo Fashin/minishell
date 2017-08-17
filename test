@@ -1,2 +1,2 @@
 make re
-valgrind -v --track-origins=yes --leak-check=full ./a.out
+valgrind -v --track-origins=yes --leak-check=full ./minishell

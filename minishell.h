@@ -49,7 +49,7 @@ char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*get_color(char *name, char **buff);
-char					*check_pers_cmd(char *str);
+char					*check_pers_cmd(char *str, int *intern);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);

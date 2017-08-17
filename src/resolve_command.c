@@ -21,7 +21,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 	if ((ret = ft_arraychr(auth_cmd, cmds[0])))
 		*intern = 1;
 	ret = (!(ret)) ? path_cmd(get_value(list, "PATH"), cmds[0]) : ret;
-	ret = (!(ret)) ? check_pers_cmd(cmds[0]) : ret;
+	ret = (!(ret)) ? check_pers_cmd(cmds[0], intern) : ret;
 	if (!(ret))
 		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
 	free_tab(&auth_cmd);
@@ -54,14 +54,14 @@ t_list				*resolve_command(char **cmds, t_list *list, int clean)
 		puterror(0, cmds[0]);
 	else
 	{
-		if (intern)
+		if (intern == 1)
 			list = exec_interne(cmds, list);
 		else
 			execute_cmd(ret, cmds, list);
 	}
 	if (!(intern))
 		ft_strdel(&ret);
-	if (clean)
+	if (clean && intern != 2)
 		free_tab(&cmds);
 	return (list);
 }
