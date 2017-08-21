@@ -16,8 +16,11 @@ t_list				*ft_cd(char **params, t_list **list)
 {
 	char		buff[BUFFPATH];
 	char		*tmp;
+	int		freed;
 
-	tmp = (!(params[1])) ? get_value(*list, "HOME") : convert_special_char(params[1], *list);
+	freed = 0;
+	tmp = (!(params[1])) ? 
+		get_value(*list, "HOME") : convert_special_char(params[1], *list, &freed);
 	if (!(tmp))
 		puterror(0, NF_ENV);
 	else
@@ -29,6 +32,7 @@ t_list				*ft_cd(char **params, t_list **list)
 		ft_strclr(buff);
 		(*list) = list_update("PWD", getcwd(buff, BUFFPATH - 1), (*list));
 	}
-	ft_strdel(&tmp);
+	if (freed)
+		ft_strdel(&tmp);
 	return ((*list));
 }

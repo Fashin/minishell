@@ -31,7 +31,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 static int			execute_cmd(char *cmd, char **params, t_list *list)
 {
 	pid_t		pid;
-	int			status;
+	int		status;
 
 	pid = fork();
 	status = 0;

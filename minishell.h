@@ -51,7 +51,7 @@ char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*get_color(char *name, char **buff);
 char					*check_pers_cmd(char *str, int *intern);
-char					*convert_special_char(char *str, t_list *list);
+char					*convert_special_char(char *str, t_list *list, int *freed);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);
