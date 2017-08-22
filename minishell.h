@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 14:46:37 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:58:50 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 # define NF_ACCESS "cb_zsh : can't access to this executable"
 # define NF_FILE "cb_zsh : no such file or directory "
 # define NF_MEM "cb_zsh : Error from memory allocation at : "
+# define RED "\e[31m"
+# define GREEN "\e[32m"
+# define YELLOW "\e[33m"
+# define BLUE "\e[34m"
+# define MAGENTA "\e[35m"
+# define CYAN "\e[36m"
+# define LIGHT_GRAY "\e[37m"
+# define LIGHT_RED "\e[91m"
+# define LIGHT_GREEN "\e[92m"
+# define LIGHT_YELLOW "\e[93m"
+# define LIGHT_BLUE "\e[94m"
+# define LIGHT_CYAN "\e[96m"
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -32,8 +44,8 @@
 
 typedef struct			s_env
 {
-		char			*name;
-		char			*value;
+	char				*name;
+	char				*value;
 }						t_env;
 
 t_list					*list_update(char *name, char *new_value, t_list *list);
@@ -53,7 +65,8 @@ char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*get_color(char *name, char **buff);
 char					*check_pers_cmd(char *str, int *intern);
-char					*convert_special_char(char *str, t_list *list, int *freed);
+char					*convert_special_char(char *str, t_list *list,
+							int *freed);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);

@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 18:42:12 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 22:40:47 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:53:18 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*convert_special_char(char *str, t_list *list, int *freed)
 
 	if (!(tmp = contain_special_char(str, list)))
 		return (str);
-	*freed = 1; 
+	*freed = 1;
 	return (ft_strjoin(tmp, str + 1));
 }
 

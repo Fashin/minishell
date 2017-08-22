@@ -1,1 +1,1 @@
-make re; valgrind --leak-check=full ./minishell
+make re; valgrind --leak-check=full ./minishell --set-prompt-color=light_blue

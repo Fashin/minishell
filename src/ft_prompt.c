@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 16:51:13 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 14:49:18 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 15:09:37 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list				*ft_prompt(t_list *list)
 {
 	char		*ret;
 	char		*buff;
-	
+
 	buff = NULL;
 	ret = put_maj(get_value(list, "COLOR"));
 	if (!(ret))
@@ -27,8 +27,6 @@ t_list				*ft_prompt(t_list *list)
 	ft_putstr(ret);
 	ft_putstr("$ > ");
 	ft_putstr("\e[37m");
-	ft_strdel(&buff);
-	ft_strdel(&ret);
 	return (list);
 }
 
@@ -49,7 +47,7 @@ t_list				*set_params(char *str, int interne, t_list *list)
 	char		*ret;
 
 	params = ft_strsplit(str, '=');
-	ret = ft_strnew(sizeof(*ret));
+	ret = NULL;
 	if (params[0] && params[1])
 	{
 		if (!(ft_strcmp(params[0], "set-prompt-color")))

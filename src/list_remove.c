@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 20:12:45 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:33:29 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:52:22 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static int			check_first_maillon(t_list **list, char *name)
 	return (0);
 }
 
-
-void			list_remove(t_list **list, char *name)
+void				list_remove(t_list **list, char *name)
 {
 	t_list		*tmp;
 	t_list		*del;

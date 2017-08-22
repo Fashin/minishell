@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:15:45 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 15:13:26 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 static int			execute_cmd(char *cmd, char **params, t_list *list)
 {
 	pid_t		pid;
-	int		status;
+	int			status;
 
 	pid = fork();
 	status = 0;
