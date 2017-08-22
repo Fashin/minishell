@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 17:01:06 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 14:12:37 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:39:54 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ char				*get_color(char *name, char **ret)
 			return (ft_strdup(colors[i][1]));
 	(*ret) = NULL;
 	return ("\e[37m");
+}
+
+t_list		*set_color(t_list *list, char **ret, char **buff)
+{
+	list = list_update("COLOR", "LIGHT_GRAY", list);
+	*ret = ft_strdup("\e[37m");
+	*buff = ft_strdup("LIGHT_GRAY");
+	return (list);
 }

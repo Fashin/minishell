@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:15:11 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:48:42 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char			*clean_up_tabs(char *str)
 	length = ft_strlen(str) + 1;
 	i = -1;
 	if (!(tmp = (char *)ft_memalloc(sizeof(char) * length)))
-		return (NULL);
+		exit(1);
 	ft_bzero(tmp, length);
 	while (str[++i])
 		tmp[i] = (str[i] == '\t') ? ' ' : str[i];

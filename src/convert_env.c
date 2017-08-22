@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 21:00:22 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/23 21:30:02 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:48:12 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,16 @@ char				**convert_env(t_list *list)
 
 	lst_length = sizeof_list(list);
 	if (!(ret = (char **)ft_memalloc(sizeof(char *) * (lst_length + 1))))
-		return (NULL);
+		exit(1);
 	i = -1;
 	while (list->content)
 	{
 		env = (t_env *)list->content;
 		lst_length = ft_strlen(env->value) + ft_strlen(env->name);
 		if (!(ret[++i] = (char *)ft_memalloc(sizeof(char) * lst_length)))
-			return (NULL);
+			exit(1);
 		ret[i] = convert_equals(env->name, env->value);
 		list = list->next;
 	}
-	//ret[i + 1] = NULL;
 	return (ret);
 }

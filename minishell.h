@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 14:23:02 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 14:46:37 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define NF_COLOR "cb_zsh : can't find this color\n"
 # define NF_ACCESS "cb_zsh : can't access to this executable"
 # define NF_FILE "cb_zsh : no such file or directory "
+# define NF_MEM "cb_zsh : Error from memory allocation at : "
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -46,6 +47,7 @@ t_list					*search_command(char *cmd, t_list *list);
 t_list					*set_params(char *str, int interne, t_list *list);
 t_list					*ft_prompt(t_list *list);
 t_list					*set_prompt(char **av, t_list *list);
+t_list					*set_color(t_list *list, char **ret, char **buff);
 char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
