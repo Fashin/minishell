@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:02:14 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:16:02 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 17:41:20 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char			*path_cmd(char *path, char *cmd)
 	char	*ret;
 
 	i = -1;
+	if (!(path))
+		return (NULL);
 	tmp = ft_strsplit(path, ':');
 	cmd = ft_strjoin("/", cmd);
 	ret = NULL;

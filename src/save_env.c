@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:17:56 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:15:21 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 17:32:56 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int					save_env(char **env, t_list **list)
 	while (env[++i])
 	{
 		tmp = ft_strsplit(env[i], '=');
+		if (!(tmp[0]) || !(tmp[1]))
+			puterror(1, ft_strjoin(RED, NF_ENVAL));
 		set_env.name = ft_strdup(tmp[0]);
 		set_env.value = ft_strdup(tmp[1]);
 		if (!(set_env.name) || !(set_env.value))

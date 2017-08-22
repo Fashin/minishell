@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 14:58:50 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 17:33:42 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define NF_ACCESS "cb_zsh : can't access to this executable"
 # define NF_FILE "cb_zsh : no such file or directory "
 # define NF_MEM "cb_zsh : Error from memory allocation at : "
+# define NF_ENVAL "cb_zsh : Error from your environnement key/value"
 # define RED "\e[31m"
 # define GREEN "\e[32m"
 # define YELLOW "\e[33m"
