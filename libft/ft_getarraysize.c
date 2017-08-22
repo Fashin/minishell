@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:38:25 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/13 22:40:03 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 15:51:49 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ size_t			ft_getarraysize(char **tab)
 {
 	size_t		i;
 
-	i = -1;
-	while (tab[++i]);
+	i = 0;
+	while (tab[i])
+		i++;
 	return (i);
 }

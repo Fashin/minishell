@@ -6,12 +6,11 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:07:33 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/07/25 23:14:38 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/22 15:50:05 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static int		ft_cnt_parts(const char *s, char c)
 {
