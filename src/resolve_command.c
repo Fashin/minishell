@@ -5,12 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 16:52:50 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 15:13:26 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2017/08/22 16:08:48 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/08/22 16:43:40 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static char			*check_strange_command(char **cmds, int *intern)
+{
+	if (!(ft_strcmp(cmds[0], ".")) || !(ft_strcmp(cmds[0], "..")))
+		*intern = 1;
+	return (cmds[0]);
+}
 
 static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 {
@@ -24,6 +31,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 	ret = (!(ret)) ? check_pers_cmd(cmds[0], intern) : ret;
 	if (!(ret))
 		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
+	cmds[0] = check_strange_command(cmds, intern);
 	free_tab(&auth_cmd);
 	return (ret);
 }
