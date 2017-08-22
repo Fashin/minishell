@@ -26,7 +26,7 @@ int					main(int ac, char **av, char **env)
 		list = set_prompt(av, list);
 	while (1)
 	{
-		ft_prompt(list);
+		list = ft_prompt(list);
 		cmd = NULL;
 		get_next_line(0, &cmd);
 		if (ft_strcmp(cmd, ""))

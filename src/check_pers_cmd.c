@@ -21,16 +21,22 @@ static int		check_start(char *str)
 	return (0);
 }
 
-char			*check_pers_cmd(char *path)
+char			*check_pers_cmd(char *path, int *intern)
 {
 	struct stat sb;
 
+	(void)intern;
 	if (!(check_start(path)))
 		return (NULL);
 	if (access(path, F_OK) == 0)
+	{
 		if (stat(path, &sb) == 0
 			&& !(sb.st_mode & S_IFDIR)
 			&& (sb.st_mode & S_IXUSR))
+		{
+			*intern = 2;
 			return (path);
+		}
+	}
 	return (NULL);
 }

@@ -12,35 +12,27 @@
 
 #include "../minishell.h"
 
-static char			*clean_spaces(char *str, t_list *list)
-{
-	int		i;
-
-	if (!(str))
-		return (get_value(list, "HOME"));
-	i = -1;
-	while (str[++i])
-		if (ft_isalpha(str[i]) || str[i] == '.' || str[i] == '/')
-			return (str + i);
-	return (get_value(list, "HOME"));
-}
-
 t_list				*ft_cd(char **params, t_list **list)
 {
 	char		buff[BUFFPATH];
 	char		*tmp;
-	char		*error;
+	int		freed;
 
-	tmp = clean_spaces(params[1], (*list));
+	freed = 0;
+	tmp = (!(params[1])) ? 
+		get_value(*list, "HOME") : convert_special_char(params[1], *list, &freed);
 	if (!(tmp))
 		puterror(0, NF_ENV);
 	else
 	{
-		(*list) = list_update("OLDPWD", getcwd(buff, BUFFPATH - 1), (*list));
-		error = ft_strjoin("cb_sh : no such file or directory: ", params[1]);
+		getcwd(buff, BUFFPATH - 1);
 		if (chdir(tmp) < 0)
-			puterror(0, error);
+			puterror(0, ft_strjoin(NF_FILE, tmp));
+		(*list) = list_update("OLDPWD", buff, (*list));
+		ft_strclr(buff);
 		(*list) = list_update("PWD", getcwd(buff, BUFFPATH - 1), (*list));
 	}
+	if (freed)
+		ft_strdel(&tmp);
 	return ((*list));
 }

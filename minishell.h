@@ -19,7 +19,8 @@
 # define NF_CMD "cb_zsh : command not found : "
 # define NF_ENV "cb_zsh : can't find home directory"
 # define NF_COLOR "cb_zsh : can't find this color\n"
-# define NF_ACCESS "cb_zsh can't access to this executable"
+# define NF_ACCESS "cb_zsh : can't access to this executable"
+# define NF_FILE "cb_zsh : no such file or directory "
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -37,7 +38,7 @@ typedef struct			s_env
 t_list					*list_update(char *name, char *new_value, t_list *list);
 t_list					*ft_cd(char **params, t_list **list);
 t_list					*exec_interne(char **params, t_list *list);
-t_list					*resolve_command(char **cmds, t_list *list);
+t_list					*resolve_command(char **cmds, t_list *list, int clean);
 t_list					*env(char **params, t_list **list);
 t_list					*set_env(char **params, t_list *list);
 t_list					*unset_env(char **params, t_list *list);
@@ -49,7 +50,8 @@ char					**convert_env(t_list *list);
 char					*get_value(t_list *list, char *name);
 char					*path_cmd(char *path, char *cmd);
 char					*get_color(char *name, char **buff);
-char					*check_pers_cmd(char *str);
+char					*check_pers_cmd(char *str, int *intern);
+char					*convert_special_char(char *str, t_list *list, int *freed);
 void					puterror(int stop, char *msg);
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);

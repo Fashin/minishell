@@ -21,7 +21,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 	if ((ret = ft_arraychr(auth_cmd, cmds[0])))
 		*intern = 1;
 	ret = (!(ret)) ? path_cmd(get_value(list, "PATH"), cmds[0]) : ret;
-	ret = (!(ret)) ? check_pers_cmd(cmds[0]) : ret;
+	ret = (!(ret)) ? check_pers_cmd(cmds[0], intern) : ret;
 	if (!(ret))
 		cmds[0] = ft_strjoin(NF_CMD, cmds[0]);
 	free_tab(&auth_cmd);
@@ -31,7 +31,7 @@ static char			*check_real_cmd(char **cmds, t_list *list, int *intern)
 static int			execute_cmd(char *cmd, char **params, t_list *list)
 {
 	pid_t		pid;
-	int			status;
+	int		status;
 
 	pid = fork();
 	status = 0;
@@ -43,7 +43,7 @@ static int			execute_cmd(char *cmd, char **params, t_list *list)
 	return (status);
 }
 
-t_list				*resolve_command(char **cmds, t_list *list)
+t_list				*resolve_command(char **cmds, t_list *list, int clean)
 {
 	char	*ret;
 	int		intern;
@@ -54,13 +54,14 @@ t_list				*resolve_command(char **cmds, t_list *list)
 		puterror(0, cmds[0]);
 	else
 	{
-		if (intern)
+		if (intern == 1)
 			list = exec_interne(cmds, list);
 		else
 			execute_cmd(ret, cmds, list);
 	}
 	if (!(intern))
 		ft_strdel(&ret);
-	free_tab(&cmds);
+	if (clean && intern != 2)
+		free_tab(&cmds);
 	return (list);
 }
