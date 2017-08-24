@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 19:05:59 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 17:46:30 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/24 19:12:37 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,25 @@ static char			*clean_up_tabs(char *str)
 	return (str);
 }
 
+static char			*clean_spaces(char *str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] != ' ')
+			return (str);
+	return (NULL);
+}
+
 t_list				*search_command(char *cmd, t_list *list)
 {
 	char	**tmp;
 	int		i;
 
-	clean_up_tabs(cmd);
+	cmd = clean_up_tabs(cmd);
+	if (!(cmd = clean_spaces(cmd)))
+		return (list);
 	if (ft_strchr(cmd, ';'))
 	{
 		i = -1;
