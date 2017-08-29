@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:58 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 17:33:42 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/29 19:38:29 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_list					*list_update(char *name, char *new_value, t_list *list);
 t_list					*ft_cd(char **params, t_list **list);
 t_list					*exec_interne(char **params, t_list *list);
 t_list					*resolve_command(char **cmds, t_list *list, int clean);
-t_list					*env(char **params, t_list **list);
+t_list					*env(char **params, t_list *list);
 t_list					*set_env(char **params, t_list *list);
 t_list					*unset_env(char **params, t_list *list);
 t_list					*search_command(char *cmd, t_list *list);
@@ -69,6 +69,9 @@ char					*check_pers_cmd(char *str, int *intern);
 char					*convert_special_char(char *str, t_list *list,
 							int *freed);
 void					puterror(int stop, char *msg);
+
+t_list					*ft_cpyenv(t_list *list);
+
 void					ft_echo(char **params);
 void					ft_exit(char **params, t_list *list, int stop);
 void					free_tab(char ***params);

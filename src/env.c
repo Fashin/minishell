@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 19:05:18 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/02 21:31:22 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/29 19:54:14 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,35 @@ void				print_env(t_list *list)
 	}
 }
 
-static void			insert_exec_new_env(char **params, t_list *list)
+static t_list		*insert_exec_new_env(char **params, t_list *list)
 {
 	char		**data;
 
 	data = ft_strsplit(params[1], '=');
 	if (data[0] && data[1])
 	{
-		list_update(data[0], data[1], list);
+		list = list_update(data[0], data[1], list);
 		if (!(params[2]))
 			print_env(list);
 		else
-			resolve_command(params + 2, list, 0);
+			list = resolve_command(params + 2, list, 0);
 	}
+	free_tab(&data);
+	return (list);
 }
 
-t_list				*env(char **params, t_list **list)
+t_list				*env(char **params, t_list *list)
 {
+	t_list		*tmp;
+
 	if (!(params[1]))
-		print_env((*list));
+		print_env(list);
 	else
-		insert_exec_new_env(params, (*list));
-	return ((*list));
+	{
+		if (!(tmp = ft_cpyenv(list)))
+			exit(-1);
+		tmp = insert_exec_new_env(params, tmp);
+		ft_lstdel(&tmp, &free_env);
+	}
+	return (list);
 }
