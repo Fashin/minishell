@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/23 22:21:33 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/22 15:52:48 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/30 18:34:52 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int			get_input(int fd, char **line)
 		else
 			return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int					get_next_line(int fd, char **line)

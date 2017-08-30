@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:12:49 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/08/08 20:02:30 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/08/30 18:36:44 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int					main(int ac, char **av, char **env)
 	{
 		list = ft_prompt(list);
 		cmd = NULL;
-		get_next_line(0, &cmd);
+		if (!(get_next_line(0, &cmd)))
+			return (0);
 		if (ft_strcmp(cmd, ""))
 			list = search_command(cmd, list);
 		ft_strdel(&cmd);
