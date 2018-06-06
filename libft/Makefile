@@ -36,7 +36,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 NAME = libft.a
 
-HEADERFLAGS = -I libft.h
+HEADERFLAGS = libft.h
 
 all: $(NAME)
 

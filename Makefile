@@ -12,7 +12,9 @@
 
 NAME = minishell
 
-CFLAGS += -Wall -Wextra -Werror -g
+# CFLAGS += -Wall -Wextra -Werror -g
+
+CFLAGS += -g
 
 SRCS = 	minishell.c search_command.c \
 		puterror.c save_env.c resolve_command.c get_value.c \
